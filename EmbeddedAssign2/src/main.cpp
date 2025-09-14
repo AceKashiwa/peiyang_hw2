@@ -36,6 +36,7 @@ void loop() {
   // }
   if (Serial.available() > 0) {
     inputString = Serial.readStringUntil('\n');
+    inputString.trim(); // 去除字符串首尾的空白字符
     if (lastString == "" && inputString != "AA") {
       Serial.println("Key Error");
     } else if (lastString == "AA" && inputString != "BB") {

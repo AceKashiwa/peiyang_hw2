@@ -86,16 +86,19 @@ const unsigned char* epd_bitmap_allArray[1] = {
 
 
 void setup() {
-  OLED.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS);
-  OLED.clearDisplay();
+  if(!OLED.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+    while(1);
+  }
 
-  // 显示文字
-  // OLED.setCursor(1, 1);
-  // OLED.setTextColor(SSD1306_WHITE);
-  // OLED.println("Hello, World!");
-  // OLED.display();
+  OLED.clearDisplay();
+  OLED.setTextColor(SSD1306_WHITE);
+  OLED.setCursor(1, 1);
+  OLED.println("Done!");
+  OLED.display();
+  delay(1000);
 
   // 显示图片
+  OLED.clearDisplay();
   OLED.drawBitmap(0, 0, epd_bitmap_svg, 128, 64, SSD1306_WHITE);
   OLED.display();
 }
